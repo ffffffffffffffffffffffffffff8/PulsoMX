@@ -1,0 +1,65 @@
+---
+layout: default
+---
+
+<div class="container">
+  <div class="content-layout">
+    <article class="post" itemscope itemtype="https://schema.org/NewsArticle">
+
+      <header class="article-header">
+        {% if page.categories %}
+        <span class="article-category-badge">{{ page.categories | first }}</span>
+        {% endif %}
+        <h1 class="article-title" itemprop="headline">{{ page.title }}</h1>
+        <div class="article-meta">
+          <span class="author">✍️ NotiRápido</span>
+          <time datetime="{{ page.date | date_to_xmlschema }}">
+            🕐 {{ page.date | date: "%d de %B, %Y" }}
+          </time>
+          {% if page.source_name %}
+          <span>📰 Fuente: {{ page.source_name }}</span>
+          {% endif %}
+        </div>
+      </header>
+
+      {% if page.image %}
+      <figure>
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="article-hero-img" loading="eager">
+      </figure>
+      {% endif %}
+
+      <div class="article-body" itemprop="articleBody">
+        {{ content }}
+      </div>
+
+      <div class="article-fb-cta">
+        <div class="fb-icon">📘</div>
+        <div class="article-fb-cta-content">
+          <div class="article-fb-cta-title">¿Te gustó esta noticia?</div>
+          <div class="article-fb-cta-text">Síguenos en Facebook y recibe las noticias más importantes al instante.</div>
+          <a href="https://facebook.com/TU-PAGINA-AQUI" target="_blank" rel="noopener" class="article-fb-cta-link">👍 Seguir NotiRápido en Facebook</a>
+        </div>
+      </div>
+
+      <div class="share-section">
+        <span class="share-label">Compartir:</span>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener" class="share-btn facebook">📘 Facebook</a>
+        <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener" class="share-btn twitter">𝕏 Twitter</a>
+        <a href="https://wa.me/?text={{ page.title | url_encode }}%20{{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener" class="share-btn whatsapp">💬 WhatsApp</a>
+      </div>
+
+      {% if page.tags and page.tags.size > 0 %}
+      <div class="tags-list">
+        {% for tag in page.tags %}
+        <a href="{{ '/tag/' | append: tag | relative_url }}" class="tag">#{{ tag }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+    </article>
+
+    <aside class="sidebar">
+      {% include sidebar.html %}
+    </aside>
+  </div>
+</div>
