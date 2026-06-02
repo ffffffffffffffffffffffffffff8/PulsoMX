@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": 1,
+    "titulo_original": "El precio de las entradas para el Mundial, en el ojo de la tormenta en México - Cadena 3 Argentina",
+    "titulo": "El precio de las entradas para el Mundial, en el ojo de la tormenta en México - Cadena 3 Argentina",
+    "resumen": "",
+    "contenido": "",
+    "imagen": "https://picsum.photos/800/500",
+    "fecha": "2026-06-02"
+  },
+  {
+    "id": 2,
+    "titulo_original": "Colapsa barda perimetral y hunde contenedores en Geo Pinos I, en Veracruz - Imagen de Veracruz",
+    "titulo": "Colapsa barda perimetral y hunde contenedores en Geo Pinos I, en Veracruz - Imagen de Veracruz",
+    "resumen": "",
+    "contenido": "",
+    "imagen": "https://picsum.photos/800/500",
+    "fecha": "2026-06-02"
+  }
+]
