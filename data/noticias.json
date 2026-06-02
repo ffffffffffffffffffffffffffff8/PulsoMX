@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": 1,
+    "titulo_original": "El precio de las entradas para el Mundial, en el ojo de la tormenta en México - Cadena 3 Argentina",
+    "titulo": "Polémica en México: El costo de las entradas para el Mundial genera debate",
+    "resumen": "La venta de entradas para el Mundial ha generado una gran polémica en México debido a sus altos precios, lo que ha llevado a una gran discusión sobre el acceso a los eventos deportivos para los fanáticos",
+    "contenido": "En México, la noticia sobre el precio de las entradas para el Mundial ha causado un gran revuelo. Los precios, considerados exorbitantes por muchos, han generado un debate nacional sobre la accesibilidad de los eventos deportivos para los fanáticos. La situación ha llevado a muchos a cuestionar la justicia en la distribución de las entradas y a exigir medidas para que todos puedan disfrutar del evento sin tener que pagar sumas prohibitivas. La polémica ha alcanzado tal magnitud que ha sido tema de discusión en los medios de comunicación y en las redes sociales, donde muchos usuarios han expresado su descontento y han pedido soluciones para poder asistir al Mundial sin tener que endeudarse.",
+    "imagen": "https://i.imgur.com/TuImagenLogo.jpg",
+    "fecha": "2026-06-02"
+  },
+  {
+    "id": 2,
+    "titulo_original": "Colapsa barda perimetral y hunde contenedores en Geo Pinos I, en Veracruz - Imagen de Veracruz",
+    "titulo": "Colapso en Geo Pinos I: Barda Perimetral se Derrumba y Contenedores se Hunden",
+    "resumen": "Un incidente sorprendente ocurrió en Geo Pinos I, Veracruz, donde la barda perimetral colapsó, causando el hundimiento de varios contenedores. El suceso ha generado preocupación y especulación sobre las causas y consecuencias.",
+    "contenido": "El colapso de la barda perimetral en Geo Pinos I, Veracruz, ha dejado un rastro de destrucción y ha puesto en alerta a las autoridades locales. Según testigos, la barda se derrumbó repentinamente, lo que provocó el hundimiento de varios contenedores que se encontraban en el lugar. Las imágenes difundidas en redes sociales muestran el alcance del daño, con contenedores volcados y escombros esparcidos por todo el área. Aunque no se han reportado heridos, el incidente ha generado inquietud entre los residentes y trabajadores de la zona. Las autoridades han iniciado una investigación para determinar las causas del colapso y tomar medidas para evitar que se repita en el futuro.",
+    "imagen": "https://i.imgur.com/TuImagenLogo.jpg",
+    "fecha": "2026-06-02"
+  }
+]
