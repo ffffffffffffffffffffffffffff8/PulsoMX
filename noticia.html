@@ -27,7 +27,7 @@
         .header-nav a:hover { color: var(--amarillo); }
         @media (max-width: 480px) { .header-nav .hide-xs { display: none; } }
 
-        /* AD */
+        /* AD — desktop muestra 728, móvil muestra 320 */
         .ad-top { text-align: center; padding: 8px; background: #f0f0f0; border-bottom: 1px solid #e0e0e0; overflow: hidden; }
         .ad-728 { display: block; }
         .ad-320 { display: none; }
@@ -48,8 +48,13 @@
         .article-meta { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; margin-bottom: 18px; font-size: clamp(0.72rem, 2vw, 0.82rem); color: var(--texto-suave); flex-wrap: wrap; }
         .article-meta i { color: var(--rojo); }
         #image { width: 100%; height: clamp(180px, 40vw, 380px); object-fit: cover; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+
+        /* AD dentro del artículo */
         .ad-article { text-align: center; margin: 24px 0; overflow: hidden; }
         .ad-article-native { margin: 24px 0; overflow: hidden; }
+        /* iframe nativo al 100% de ancho */
+        .ad-article-native iframe { width: 100% !important; max-width: 100%; height: 250px; border: none; }
+
         #body { font-size: clamp(0.95rem, 2.5vw, 1.05rem); line-height: 1.85; color: #2d2d2d; word-break: break-word; }
         #body p { margin-bottom: 16px; }
 
@@ -88,7 +93,7 @@
         .ad-sidebar { text-align: center; overflow: hidden; margin-bottom: 18px; }
 
         /* FOOTER */
-        footer { background: var(--texto); color: rgba(255,255,255,0.7); margin-top: 40px; padding: 24px 16px; text-align: center; font-size: 0.8rem; }
+        footer { background: var(--texto); color: rgba(255,255,255,0.7); margin-top: 40px; padding: 24px 16px; text-align: center; font-size: clamp(0.72rem, 2vw, 0.8rem); }
         footer a { color: var(--amarillo); text-decoration: none; }
         .footer-links { display: flex; justify-content: center; gap: 14px; margin-bottom: 10px; flex-wrap: wrap; }
 
@@ -108,6 +113,7 @@
         </div>
     </header>
 
+    <!-- Ad top — desktop 728x90 / móvil 320x50 -->
     <div class="ad-top">
         <div class="ad-728">
             <iframe sandbox="allow-scripts allow-popups allow-same-origin" width="728" height="90" frameborder="0" scrolling="no" srcdoc="<html><body><script>atOptions = {'key':'7f7f7c1f4dcc288bb79ea8e84f8e3cfa','format':'iframe','height':90,'width':728,'params':{}};</script><script src='https://alarmpenguinmelt.com/7f7f7c1f4dcc288bb79ea8e84f8e3cfa/invoke.js'></script></body></html>"></iframe>
@@ -138,12 +144,14 @@
                 </div>
                 <img id="image" alt="">
 
+                <!-- Native Banner superior -->
                 <div class="ad-article-native">
                     <iframe sandbox="allow-scripts allow-popups allow-same-origin" width="100%" height="250" frameborder="0" scrolling="no" srcdoc="<html><body><script async='async' data-cfasync='false' src='https://alarmpenguinmelt.com/7378a712ef2e1acc90b8893efa12f6e6/invoke.js'></script><div id='container-7378a712ef2e1acc90b8893efa12f6e6'></div></body></html>"></iframe>
                 </div>
 
                 <div id="body"></div>
 
+                <!-- Banner inferior — desktop 728x90 / móvil 320x50 -->
                 <div class="ad-article">
                     <div class="ad-728">
                         <iframe sandbox="allow-scripts allow-popups allow-same-origin" width="728" height="90" frameborder="0" scrolling="no" srcdoc="<html><body><script>atOptions = {'key':'7f7f7c1f4dcc288bb79ea8e84f8e3cfa','format':'iframe','height':90,'width':728,'params':{}};</script><script src='https://alarmpenguinmelt.com/7f7f7c1f4dcc288bb79ea8e84f8e3cfa/invoke.js'></script></body></html>"></iframe>
