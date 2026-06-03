@@ -24,47 +24,51 @@ def guardar_noticias(noticias):
     with open(JSON_PATH, "w", encoding="utf-8") as f:
         json.dump(noticias, f, ensure_ascii=False, indent=2)
 
-def extraer_palabras_clave(titulo):
-    """Extrae palabras clave relevantes del título para buscar imagen."""
-    stopwords = {'de','la','el','en','y','a','los','las','del','un','una','por','con','se','que',
-                 'es','al','su','lo','le','más','pero','si','como','ya','muy','me','mi','nos',
-                 'sin','sobre','entre','cuando','hasta','desde','también','fue','han','hay',
-                 'para','este','esta','esto','ese','esa','ser','sus','les','fue','era','son'}
-    palabras = re.findall(r'\b[a-záéíóúüñA-ZÁÉÍÓÚÜÑ]{4,}\b', titulo)
-    keywords = [p.lower() for p in palabras if p.lower() not in stopwords]
-    return ' '.join(keywords[:4]) if keywords else 'mexico'
+def extraer_imagen_noticia(url):
+    """Extrae la imagen og:image de la noticia original."""
+    if not url or url == '#':
+        return None
+    try:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+        }
+        r = requests.get(url, headers=headers, timeout=10, allow_redirects=True)
+        if r.status_code != 200:
+            return None
 
-def generar_imagen_relevante(titulo):
-    """Genera imagen usando Pexels API gratuita con fallback a Picsum."""
-    # Seed único por noticia basado en el título
+        # Buscar og:image
+        og_match = re.search(r'<meta[^>]*property=["\']og:image["\'][^>]*content=["\'](https?://[^"\']+)["\']', r.text)
+        if og_match:
+            return og_match.group(1)
+
+        # Buscar twitter:image como fallback
+        tw_match = re.search(r'<meta[^>]*name=["\']twitter:image["\'][^>]*content=["\'](https?://[^"\']+)["\']', r.text)
+        if tw_match:
+            return tw_match.group(1)
+
+        # Buscar cualquier img grande como último recurso
+        img_match = re.search(r'<img[^>]*src=["\'](https?://[^"\']+\.(jpg|jpeg|png|webp))["\']', r.text)
+        if img_match:
+            return img_match.group(1)
+
+    except Exception as e:
+        print(f"⚠️ No se pudo extraer imagen de {url[:50]}: {e}")
+    return None
+
+def generar_imagen_fallback(titulo):
+    """Imagen de respaldo si no se puede extraer la original."""
     seed = abs(hash(titulo)) % 9999
-
-    # Mapeo de temas a keywords en inglés para Pexels
-    temas = {
-        'policia': 'police', 'crimen': 'crime', 'violencia': 'security',
-        'gobierno': 'government', 'presidente': 'president', 'política': 'politics',
-        'economía': 'economy', 'peso': 'finance', 'inflación': 'economy',
-        'deportes': 'sports', 'futbol': 'soccer', 'liga': 'soccer',
-        'terremoto': 'earthquake', 'sismo': 'earthquake', 'huracán': 'storm',
-        'incendio': 'fire', 'accidente': 'accident', 'hospital': 'hospital',
-        'elecciones': 'election', 'congreso': 'congress', 'narco': 'security',
-        'educación': 'education', 'tecnología': 'technology', 'salud': 'health',
-        'ciudad': 'city', 'mexico': 'mexico city', 'migración': 'migration',
-        'empresas': 'business', 'banco': 'bank finance', 'trabajo': 'workers',
-    }
-
-    titulo_lower = titulo.lower()
-    keyword = 'mexico'
-    for clave, valor in temas.items():
-        if clave in titulo_lower:
-            keyword = valor
-            break
-
-    keyword_encoded = quote(keyword)
-
-    # Picsum Photos — imágenes reales, siempre disponible, sin API key
-    # seed garantiza imagen única y consistente por noticia
     return f"https://picsum.photos/seed/{seed}/800/500"
+
+def generar_imagen_relevante(titulo, url_origen=None):
+    """Intenta extraer imagen real de la noticia, con fallback a Picsum."""
+    if url_origen and url_origen != '#':
+        img = extraer_imagen_noticia(url_origen)
+        if img:
+            print(f"🖼️ Imagen extraída: {img[:60]}...")
+            return img
+    print(f"🖼️ Usando imagen de respaldo para: {titulo[:40]}")
+    return generar_imagen_fallback(titulo)
 
 def reescribir_con_ia(titulo_orig):
     if not GROQ_API_KEY:
@@ -142,7 +146,7 @@ def ejecutar():
         print(f"🔄 Procesando: {t_orig[:60]}...")
         t_ia, r_ia, c_ia = reescribir_con_ia(t_orig)
 
-        img_url = generar_imagen_relevante(t_ia)
+        img_url = generar_imagen_relevante(t_ia, url_origen=link)
 
         nuevo_id = max([n["id"] for n in noticias_guardadas], default=0) + 1
         noticias_guardadas.append({
