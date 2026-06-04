@@ -86,7 +86,9 @@ def obtener_imagen(titulo, url_real):
     
     if img:
         print(f"   🖼️ Imagen extraída del artículo ✅")
-        return img, url_real
+        # 🔥 EL TRUCO ESTÁ AQUÍ: Envolvemos la imagen en un proxy libre de CORS/Hotlinking
+        img_proxy = f"https://wsrv.nl/?url={img}"
+        return img_proxy, url_real
     else:
         print(f"   ⚠️ No se encontró imagen en el artículo, usando fallback")
         return imagen_fallback(titulo), url_real
