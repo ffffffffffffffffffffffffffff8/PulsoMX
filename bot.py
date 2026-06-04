@@ -81,7 +81,6 @@ def imagen_fallback(titulo):
     seed = abs(hash(titulo)) % 9999
     return f"https://picsum.photos/seed/{seed}/800/500"
 
-
 def obtener_imagen(titulo, url_real):
     print(f"   🌐 URL directa: {url_real[:65]}...")
     img = extraer_imagen_de_articulo(url_real)
@@ -217,7 +216,7 @@ def ejecutar():
             print(f"✅ Guardada: {t_ia[:50]} ({len(c_ia.split())} palabras)")
             
             # ⏱️ Pausa obligatoria para evitar el bloqueo de Groq (Rate Limit)
-            time.sleep(4)
+            time.sleep(10)
 
     if nuevos > 0:
         if len(noticias_guardadas) > 100:
