@@ -248,7 +248,8 @@
                 document.getElementById('article-wrapper').style.display = 'grid';
 
                 // --- LÓGICA DE LA BARRA DE PROGRESO AUTOMÁTICA ---
-               if (userId && id) {
+              if (userId && id) {
+    (async () => {
     const widget = document.getElementById('reward-widget');
     const progressBar = document.getElementById('reward-progress');
     const rewardText = document.getElementById('reward-text');
@@ -264,7 +265,6 @@
         const checkData = await checkRes.json();
 
         if (checkData.ya_leida) {
-            // Mostrar barra roja inmediatamente
             progressBar.style.transition = 'width 0.4s ease';
             progressBar.style.width = '100%';
             progressBar.style.background = '#ef4444';
@@ -273,16 +273,15 @@
                 widget.style.opacity = '0';
                 setTimeout(() => widget.style.display = 'none', 500);
             }, 3000);
-            return; // No iniciar el contador
+            return;
         }
     } catch(e) {
-        // Si falla la verificación, dejamos que el flujo normal continúe
+        // Si falla la verificación, continúa normalmente
     }
 
     const tiempoTotal = 30; 
     let segundosActuales = 0;
-
-                    const intervaloProgreso = setInterval(async () => {
+    const intervaloProgreso = setInterval(async () => {
                         segundosActuales++;
                         const porcentaje = (segundosActuales / tiempoTotal) * 100;
                         progressBar.style.width = porcentaje + '%';
