@@ -283,7 +283,12 @@
                                         setTimeout(() => widget.style.display = 'none', 500);
                                     }, 4000);
                                 } else {
-                                    const msj = result.error === 'ya_reclamada' ? 'Ya cobraste esta noticia' : 'Error al reclamar';
+                                    const mensajes = {
+    'ya_reclamada': 'Ya cobraste esta noticia',
+    'limite_diario': '¡Límite diario alcanzado! (10 noticias/día)',
+    'usuario_invalido': 'Usuario no reconocido'
+};
+const msj = mensajes[result.error] || 'Error al reclamar';
                                     rewardText.innerHTML = '<i class="fa-solid fa-circle-exclamation" style="color:#ef4444;"></i> ' + msj;
                                     progressBar.style.background = '#ef4444';
                                 }
